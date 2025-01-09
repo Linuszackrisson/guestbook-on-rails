@@ -13,6 +13,16 @@ class MessagesController < ApplicationController
         render :index
       end
     end
+    def destroy
+        if params[:password] == 'hemligt' # Byt ut till ditt önskade lösenord
+          @message = Message.find(params[:id])
+          @message.destroy
+          redirect_to root_path, notice: 'Meddelandet har tagits bort!'
+        else
+          redirect_to root_path, alert: 'Fel lösenord. Meddelandet togs inte bort.'
+        end
+      end
+      
   
     private
   

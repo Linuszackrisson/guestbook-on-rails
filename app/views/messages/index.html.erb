@@ -16,9 +16,18 @@
 
 <h2>Meddelanden:</h2>
 <% @messages.each do |message| %>
-  <div style="margin-bottom: 20px; padding: 10px; border: 1px solid #ccc;">
-    <p><strong><%= message.name %></strong></p>
-    <p><%= message.content %></p>
-    <small><%= message.created_at.strftime('%Y-%m-%d %H:%M') %></small>
-  </div>
-<% end %>
+    <div style="margin-bottom: 20px; padding: 10px; border: 1px solid #ccc;">
+      <p><strong><%= message.name %></strong></p>
+      <p><%= message.content %></p>
+      <small><%= message.created_at.strftime('%Y-%m-%d %H:%M') %></small>
+  
+      <%= form_with url: message_path(message), method: :delete, local: true do |f| %>
+        <p>
+          <%= f.label :password, 'Lösenord:' %>
+          <%= f.password_field :password %>
+          <%= f.submit 'Ta bort', data: { confirm: 'Är du säker på att du vill ta bort detta meddelande?' } %>
+        </p>
+      <% end %>
+    </div>
+  <% end %>
+  
