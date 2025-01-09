@@ -1,0 +1,24 @@
+<h1>Gästbok</h1>
+
+<%= form_with model: @message, local: true do |f| %>
+  <p>
+    <%= f.label :name, 'Namn:' %><br>
+    <%= f.text_field :name, required: true %>
+  </p>
+  <p>
+    <%= f.label :content, 'Meddelande:' %><br>
+    <%= f.text_area :content, required: true %>
+  </p>
+  <p>
+    <%= f.submit 'Skicka' %>
+  </p>
+<% end %>
+
+<h2>Meddelanden:</h2>
+<% @messages.each do |message| %>
+  <div style="margin-bottom: 20px; padding: 10px; border: 1px solid #ccc;">
+    <p><strong><%= message.name %></strong></p>
+    <p><%= message.content %></p>
+    <small><%= message.created_at.strftime('%Y-%m-%d %H:%M') %></small>
+  </div>
+<% end %>
